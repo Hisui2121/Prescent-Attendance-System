@@ -12,6 +12,18 @@ public class DBInitialize {
             Connection conn = DBConnect.connect();
             Statement stmt = conn.createStatement();
             
+            // USERS TABLE
+            
+            stmt.executeUpdate(
+                "CREATE TABLE IF NOT EXISTS users ("
+                + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "username TEXT UNIQUE NOT NULL,"
+                + "password TEXT NOT NULL,"
+                + "role TEXT NOT NULL,"
+                + "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+                + ");"
+            );
+
             // STUDENTS TABLE
             
             stmt.executeUpdate(
@@ -92,10 +104,45 @@ public class DBInitialize {
             );
 
             System.out.println("Database initialized successfully!");
+            
+            // INSERT DEFAULT ADMIN USER (if not exists)
+            insertDefaultUsers(stmt);
 
         } catch (Exception e) {
 
             System.out.println("DB Init Error: " + e.getMessage());
+        }
+    }
+    
+    private static void insertDefaultUsers(Statement stmt) {
+        try {
+            // Check if admin user exists
+            String checkSQL = "SELECT COUNT(*) FROM users WHERE username = 'admin'";
+            java.sql.ResultSet rs = stmt.executeQuery(checkSQL);
+            
+            if (rs.next() && rs.getInt(1) == 0) {
+                // Hash password using PasswordUtil
+                util.PasswordUtil password = new util.PasswordUtil();
+                String hashedPassword = util.PasswordUtil.hashPassword("admin123");
+                
+                String insertSQL = String.format(
+                    "INSERT INTO users (username, password, role) VALUES ('admin', '%s', 'admin')",
+                    hashedPassword.replace("'", "''")
+                );
+                stmt.executeUpdate(insertSQL);
+                System.out.println("✓ Default admin user created (username: admin, password: admin123)");
+                
+                // Insert a sample teacher
+                String teacherPassword = util.PasswordUtil.hashPassword("teacher123");
+                String insertTeacher = String.format(
+                    "INSERT INTO users (username, password, role) VALUES ('teacher1', '%s', 'teacher')",
+                    teacherPassword.replace("'", "''")
+                );
+                stmt.executeUpdate(insertTeacher);
+                System.out.println("✓ Sample teacher user created (username: teacher1, password: teacher123)");
+            }
+        } catch (Exception e) {
+            // Users may already exist, ignore error
         }
     }
 }
