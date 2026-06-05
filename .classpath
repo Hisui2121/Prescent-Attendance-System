@@ -7,19 +7,21 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.53.0.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bryze Sia Ayapana/eclipse-workspace/Prescent-Attendance-System/lib/commons-beanutils-1.9.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bryze Sia Ayapana/eclipse-workspace/Prescent-Attendance-System/lib/commons-collections-3.2.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bryze Sia Ayapana/eclipse-workspace/Prescent-Attendance-System/lib/commons-collections4-4.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bryze Sia Ayapana/eclipse-workspace/Prescent-Attendance-System/lib/commons-digester-2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bryze Sia Ayapana/eclipse-workspace/Prescent-Attendance-System/lib/commons-logging-1.3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bryze Sia Ayapana/eclipse-workspace/Prescent-Attendance-System/lib/itext-2.1.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bryze Sia Ayapana/eclipse-workspace/Prescent-Attendance-System/lib/jasperreports-6.20.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bryze Sia Ayapana/eclipse-workspace/Prescent-Attendance-System/lib/slf4j-api-2.0.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bryze Sia Ayapana/eclipse-workspace/Prescent-Attendance-System/lib/slf4j-simple-2.0.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ritz Gabriel/eclipse/java-2025-092/eclipse/Prescent-Attendance-System/lib/commons-beanutils-1.9.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ritz Gabriel/eclipse/java-2025-092/eclipse/Prescent-Attendance-System/lib/commons-collections-3.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ritz Gabriel/eclipse/java-2025-092/eclipse/Prescent-Attendance-System/lib/commons-collections4-4.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ritz Gabriel/eclipse/java-2025-092/eclipse/Prescent-Attendance-System/lib/commons-digester-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ritz Gabriel/eclipse/java-2025-092/eclipse/Prescent-Attendance-System/lib/commons-logging-1.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ritz Gabriel/eclipse/java-2025-092/eclipse/Prescent-Attendance-System/lib/itext-2.1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ritz Gabriel/eclipse/java-2025-092/eclipse/Prescent-Attendance-System/lib/jasperreports-6.20.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ritz Gabriel/eclipse/java-2025-092/eclipse/Prescent-Attendance-System/lib/slf4j-api-2.0.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ritz Gabriel/eclipse/java-2025-092/eclipse/Prescent-Attendance-System/lib/slf4j-simple-2.0.17.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Ritz Gabriel/eclipse/java-2025-092/eclipse/Prescent-Attendance-System/lib/serializer-2.7.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ritz Gabriel/eclipse/java-2025-092/eclipse/Prescent-Attendance-System/lib/xalan-2.7.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

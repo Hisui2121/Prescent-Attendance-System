@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<studentReport>
+  <students>
+    <student>
+      <studentId>S-002</studentId>
+      <fullName>Jade Manalang</fullName>
+      <course>BSIT</course>
+      <yearLevel>2</yearLevel>
+      <email>jade@gmail.com</email>
+    </student>
+    <student>
+      <studentId>S-003</studentId>
+      <fullName>Ritz Ayapana</fullName>
+      <course>BSIT</course>
+      <yearLevel>2</yearLevel>
+      <email>bryze@paredes</email>
+    </student>
+    <student>
+      <studentId>S-004</studentId>
+      <fullName>Bryze Ayapana</fullName>
+      <course>BSIT</course>
+      <yearLevel>2</yearLevel>
+      <email>bryzeayapana@gmail.com</email>
+    </student>
+  </students>
+</studentReport>

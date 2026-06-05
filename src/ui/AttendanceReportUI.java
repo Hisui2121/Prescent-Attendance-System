@@ -22,6 +22,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import report.ReportEngine;
+import report.JasperReportEngine;
+
 public class AttendanceReportUI {
 
     private AttendanceRecordDAO recordDAO = new AttendanceRecordDAO();
@@ -161,7 +164,7 @@ public class AttendanceReportUI {
             ArrayList<AttendanceRecord> records = recordDAO.getAttendanceSheet(sessionId);
             if (records.isEmpty()) return;
 
-            ReportGenerator.generateAttendancePDF(records, file.getAbsolutePath(), subjectName, sessionDate, professor, classroom, schedule);
+            new ReportGenerator(new JasperReportEngine()).generateAttendancePDF(records, file.getAbsolutePath(), subjectName, sessionDate, professor, classroom, schedule);
             System.out.println("Report generated!");
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());

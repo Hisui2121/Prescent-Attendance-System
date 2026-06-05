@@ -20,6 +20,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import report.JasperReportEngine;
+import report.ReportEngine;
+
 public class StudentReportUI {
 
     private StudentDAO studentDAO = new StudentDAO();
@@ -89,7 +92,7 @@ public class StudentReportUI {
         }
 
         try {
-            ReportGenerator.generateStudentPDF(students, file.getAbsolutePath());
+        	new ReportGenerator(new JasperReportEngine()).generateStudentPDF(students, file.getAbsolutePath());
             System.out.println("Success! Report saved at: " + file.getAbsolutePath());
         } catch (Exception ex) {
             System.out.println("Error generating Jasper Report: " + ex.getMessage());

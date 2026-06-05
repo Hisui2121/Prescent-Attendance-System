@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+              http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="student_list_report"
+              pageWidth="595" pageHeight="842"
+              columnWidth="555" leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20">
+
+    <!-- Fields mapped from XML student nodes via XPath -->
+    <field name="studentId" class="java.lang.String">
+        <fieldDescription><![CDATA[studentId]]></fieldDescription>
+    </field>
+    <field name="fullName" class="java.lang.String">
+        <fieldDescription><![CDATA[fullName]]></fieldDescription>
+    </field>
+    <field name="course" class="java.lang.String">
+        <fieldDescription><![CDATA[course]]></fieldDescription>
+    </field>
+    <field name="yearLevel" class="java.lang.String">
+        <fieldDescription><![CDATA[yearLevel]]></fieldDescription>
+    </field>
+    <field name="email" class="java.lang.String">
+        <fieldDescription><![CDATA[email]]></fieldDescription>
+    </field>
+
+    <title>
+        <band height="30">
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="30"/>
+                <textElement textAlignment="Center">
+                    <font size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Student List Report]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <columnHeader>
+        <band height="22">
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="22" backcolor="#333333" mode="Opaque"/>
+            </rectangle>
+            <staticText>
+                <reportElement x="0" y="3" width="100" height="16" forecolor="#FFFFFF"/>
+                <textElement><font isBold="true" size="10"/></textElement>
+                <text><![CDATA[Student ID]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="100" y="3" width="150" height="16" forecolor="#FFFFFF"/>
+                <textElement><font isBold="true" size="10"/></textElement>
+                <text><![CDATA[Full Name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="250" y="3" width="100" height="16" forecolor="#FFFFFF"/>
+                <textElement><font isBold="true" size="10"/></textElement>
+                <text><![CDATA[Course]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="350" y="3" width="60" height="16" forecolor="#FFFFFF"/>
+                <textElement><font isBold="true" size="10"/></textElement>
+                <text><![CDATA[Year]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="410" y="3" width="145" height="16" forecolor="#FFFFFF"/>
+                <textElement><font isBold="true" size="10"/></textElement>
+                <text><![CDATA[Email]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="20">
+            <textField>
+                <reportElement x="0" y="2" width="100" height="16"/>
+                <textFieldExpression>$F{studentId}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="100" y="2" width="150" height="16"/>
+                <textFieldExpression>$F{fullName}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="250" y="2" width="100" height="16"/>
+                <textFieldExpression>$F{course}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="350" y="2" width="60" height="16"/>
+                <textFieldExpression>$F{yearLevel}</textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="410" y="2" width="145" height="16"/>
+                <textFieldExpression>$F{email}</textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+</jasperReport>

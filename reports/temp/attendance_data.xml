@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<attendanceReport>
+  <header>
+    <subjectName>Introduction To Computing</subjectName>
+    <sessionDate>2026-06-08</sessionDate>
+    <professor>Lady Modesto</professor>
+    <classroom>Laboratory</classroom>
+    <schedule>Monday</schedule>
+  </header>
+  <records>
+    <record>
+      <studentId>S-002</studentId>
+      <fullName>Jade Manalang</fullName>
+      <status>Present</status>
+    </record>
+    <record>
+      <studentId>S-003</studentId>
+      <fullName>Ritz Ayapana</fullName>
+      <status>Absent</status>
+    </record>
+    <record>
+      <studentId>S-004</studentId>
+      <fullName>Bryze Ayapana</fullName>
+      <status>Late</status>
+    </record>
+  </records>
+</attendanceReport>
