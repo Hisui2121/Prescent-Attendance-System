@@ -315,7 +315,7 @@ public class AttendanceRecordDAO {
         ArrayList<AttendanceRecord> list = new ArrayList<>();
 
         String sql =
-            "SELECT ar.student_id AS student_id, s.full_name AS full_name, s.course AS course, s.year_level AS year_level, s.email AS email, ar.status AS status, ar.timestamp AS timestamp "
+            "SELECT ar.id AS id, ar.session_id AS session_id, ar.student_id AS student_id, s.full_name AS full_name, s.course AS course, s.year_level AS year_level, s.email AS email, ar.status AS status, ar.timestamp AS timestamp "
           + "FROM attendance_records ar "
           + "JOIN students s ON ar.student_id = s.student_id "
           + "JOIN attendance_sessions ss ON ar.session_id = ss.id "
@@ -347,6 +347,8 @@ public class AttendanceRecordDAO {
 
             while (rs.next()) {
                 AttendanceRecord r = new AttendanceRecord();
+                r.setId(rs.getInt("id"));
+                r.setSessionId(rs.getInt("session_id")); // FIX: was missing — chart date lookup now works
                 r.setStudentId(rs.getString("student_id"));
                 r.setFullName(rs.getString("full_name"));
                 // populate reporting fields

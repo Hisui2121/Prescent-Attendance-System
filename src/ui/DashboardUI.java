@@ -18,10 +18,6 @@ import dao.AttendanceRecordDAO;
 
 import java.util.ArrayList;
 import java.util.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.LineChart;
@@ -212,7 +208,7 @@ public class DashboardUI {
         contentArea.getChildren().add(view);
     }
 
-    // --- THE STATS DASHBOARD (Eksaktong gaya ng reference) ---
+    // --- THE STATS DASHBOARD ---
     private VBox getStatsView() {
         VBox layout = new VBox(25);
 
@@ -229,53 +225,38 @@ public class DashboardUI {
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        // removed generate term report button per request
         header.getChildren().addAll(texts, spacer);
         header.setAlignment(Pos.CENTER_LEFT);
 
-        // Compute dynamic stats
+        // Compute dynamic stats fresh from DB every time this view is opened
         int totalStudents = 0;
         int activeClasses = 0;
         double avgAttendance = 0.0;
-        int pendingReports = 0;
+        int totalSessions = 0;
 
-        try {
-            totalStudents = studentDAO.getAllStudents().size();
-        } catch (Exception ex) { totalStudents = 0; }
-
-        try {
-            activeClasses = classDAO.getAllClasses().size();
-        } catch (Exception ex) { activeClasses = 0; }
+        try { totalStudents = studentDAO.getAllStudents().size(); } catch (Exception ex) { totalStudents = 0; }
+        try { activeClasses = classDAO.getAllClasses().size(); }   catch (Exception ex) { activeClasses = 0; }
 
         try {
             ArrayList<model.AttendanceSession> sessions = sessionDAO.getAllSessions();
-            int totalRecords = 0;
-            int totalPresent = 0;
+            totalSessions = sessions.size();
+            int totalRecords = 0, totalPresent = 0;
             for (model.AttendanceSession s : sessions) {
-                ArrayList<model.AttendanceRecord> sheet = recordDAO.getAttendanceSheet(s.getId());
-                for (model.AttendanceRecord r : sheet) {
+                for (model.AttendanceRecord r : recordDAO.getAttendanceSheet(s.getId())) {
                     totalRecords++;
                     if ("Present".equalsIgnoreCase(r.getStatus())) totalPresent++;
                 }
             }
-            if (totalRecords > 0) {
-                avgAttendance = ((double) totalPresent / (double) totalRecords) * 100.0;
-            } else {
-                avgAttendance = 0.0;
-            }
-            pendingReports = sessions.size();
-        } catch (Exception ex) {
-            avgAttendance = 0.0;
-            pendingReports = 0;
-        }
+            avgAttendance = totalRecords > 0 ? ((double) totalPresent / totalRecords) * 100.0 : 0.0;
+        } catch (Exception ex) { avgAttendance = 0.0; totalSessions = 0; }
 
-        // 4 Stat Cards Row
+        // 4 Stat Cards Row - values reflect latest DB state
         HBox statsRow = new HBox(20);
         statsRow.getChildren().addAll(
-            createStatCard("TOTAL STUDENTS", String.valueOf(totalStudents)),
+            createStatCard("TOTAL STUDENTS",  String.valueOf(totalStudents)),
             createStatCard("AVG. ATTENDANCE", String.format("%.1f%%", avgAttendance)),
-            createStatCard("ACTIVE CLASSES", String.valueOf(activeClasses)),
-            createStatCard("PENDING REPORTS", String.valueOf(pendingReports))
+            createStatCard("ACTIVE CLASSES",  String.valueOf(activeClasses)),
+            createStatCard("TOTAL SESSIONS",  String.valueOf(totalSessions))
         );
 
         // Attendance chart pane (chartPane contains a blank chart by default)
@@ -408,9 +389,18 @@ public class DashboardUI {
             }
             String selectedMonth = monthSelector.getValue();
 
-            List<model.AttendanceRecord> records = recordDAO.getAttendanceReport(null, classId, course, yearLevel, null);
+            // Build sessionId -> session_date map for this class so we bucket by session_date
+            // (reliable date chosen by the teacher, not the record creation timestamp)
+            final Map<Integer, String> sessionDateMap = new HashMap<>();
+            try {
+                for (model.AttendanceSession s : sessionDAO.getAllSessions()) {
+                    if (classId == null || s.getClassId() == classId) {
+                        sessionDateMap.put(s.getId(), s.getSessionDate());
+                    }
+                }
+            } catch (Exception ex2) { System.out.println("sessionDateMap error: " + ex2.getMessage()); }
 
-            DateTimeFormatter[] fmts = new DateTimeFormatter[]{DateTimeFormatter.ISO_DATE_TIME, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")};
+            List<model.AttendanceRecord> records = recordDAO.getAttendanceReport(null, classId, course, yearLevel, null);
 
             // bucket -> [present, late, absent]
             Map<String, int[]> totals = new HashMap<>();
@@ -425,21 +415,24 @@ public class DashboardUI {
             }
 
             final String[] WEEK_NAMES = new String[]{"1st Week","2nd Week","3rd Week"};
+            final int finalSelectedYear = selectedYear;
+            final Integer finalSpecificMonthIndex = specificMonthIndex;
+
             if (isSpecificMonth) {
                 for (String w : WEEK_NAMES) totals.putIfAbsent(w, new int[]{0,0,0});
                 for (model.AttendanceRecord r : records) {
-                    String ts = r.getTimestamp(); if (ts == null) continue;
-                    LocalDateTime dt = null;
-                    try { dt = LocalDateTime.parse(ts); } catch (DateTimeParseException ex) { try { dt = LocalDateTime.parse(ts, fmts[1]); } catch (Exception ex2) { dt = null; } }
-                    if (dt == null) continue;
-                    if (dt.getYear() != selectedYear) continue;
-                    if (specificMonthIndex == null || dt.getMonthValue() != specificMonthIndex) continue;
-                    int day = dt.getDayOfMonth();
-                    String bucketKey = null;
-                    if (day >= 1 && day <= 7) bucketKey = WEEK_NAMES[0];
-                    else if (day >= 8 && day <= 14) bucketKey = WEEK_NAMES[1];
-                    else if (day >= 15 && day <= 21) bucketKey = WEEK_NAMES[2];
-                    else continue;
+                    // Use session_date for bucketing
+                    String sdate = sessionDateMap.get(r.getSessionId());
+                    if (sdate == null) continue;
+                    java.time.LocalDate sd;
+                    try { sd = java.time.LocalDate.parse(sdate.substring(0, 10)); } catch (Exception ex) { continue; }
+                    if (sd.getYear() != finalSelectedYear) continue;
+                    if (finalSpecificMonthIndex == null || sd.getMonthValue() != finalSpecificMonthIndex) continue;
+                    int day = sd.getDayOfMonth();
+                    String bucketKey;
+                    if (day <= 7) bucketKey = WEEK_NAMES[0];
+                    else if (day <= 14) bucketKey = WEEK_NAMES[1];
+                    else bucketKey = WEEK_NAMES[2];
                     totals.putIfAbsent(bucketKey, new int[]{0,0,0});
                     int[] counts = totals.get(bucketKey);
                     String status = r.getStatus() == null ? "" : r.getStatus().trim();
@@ -450,12 +443,12 @@ public class DashboardUI {
                 bucketsOrder.addAll(Arrays.asList(WEEK_NAMES));
             } else {
                 for (model.AttendanceRecord r : records) {
-                    String ts = r.getTimestamp(); if (ts == null) continue;
-                    LocalDateTime dt = null;
-                    try { dt = LocalDateTime.parse(ts); } catch (DateTimeParseException ex) { try { dt = LocalDateTime.parse(ts, fmts[1]); } catch (Exception ex2) { dt = null; } }
-                    if (dt == null) continue;
-                    if (dt.getYear() != selectedYear) continue;
-                    String bucketKey = MONTH_NAMES[dt.getMonthValue() - 1];
+                    String sdate = sessionDateMap.get(r.getSessionId());
+                    if (sdate == null) continue;
+                    java.time.LocalDate sd;
+                    try { sd = java.time.LocalDate.parse(sdate.substring(0, 10)); } catch (Exception ex) { continue; }
+                    if (sd.getYear() != finalSelectedYear) continue;
+                    String bucketKey = MONTH_NAMES[sd.getMonthValue() - 1];
                     totals.putIfAbsent(bucketKey, new int[]{0,0,0});
                     int[] counts = totals.get(bucketKey);
                     String status = r.getStatus() == null ? "" : r.getStatus().trim();
