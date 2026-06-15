@@ -9,15 +9,6 @@ import model.Person;
 import model.User;
 import util.PasswordUtil;
 
-/**
- * Data Access Object for system User records.
- *
- * OOP CONCEPTS DEMONSTRATED:
- * - Polymorphism  : mapRow() returns Person; getAllPersons() lets callers
- *                   treat Users uniformly alongside Students and Teachers.
- * - Dynamic Binding: Person.getDisplayInfo() / getPersonId() / getRole()
- *                    resolve to User's overridden versions at runtime.
- */
 public class UserDAO {
 
     // =========================================================
@@ -111,21 +102,6 @@ public class UserDAO {
         return users;
     }
 
-    /**
-     * Returns all users as Person references.
-     * Demonstrates polymorphism: callers can mix Users, Students, and Teachers
-     * in one List<Person> and call getDisplayInfo() on all of them —
-     * dynamic binding picks the right override at runtime for each object.
-     *
-     * Example usage:
-     *   List<Person> everyone = new ArrayList<>();
-     *   everyone.addAll(userDAO.getAllPersons());
-     *   everyone.addAll(studentDAO.getAllPersons());
-     *   everyone.addAll(teacherDAO.getAllPersons());
-     *   for (Person p : everyone) {
-     *       System.out.println(p.getDisplayInfo()); // correct override per type
-     *   }
-     */
     public List<Person> getAllPersons() {
         List<Person> persons = new ArrayList<>();
         try {

@@ -15,9 +15,6 @@ public class AttendanceRecordDAO {
         return generateAttendanceSheet(sessionId, classId, null, null);
     }
 
-    // =====================================
-    // GENERATE ATTENDANCE SHEET
-    // =====================================
     public boolean generateAttendanceSheet(
             int sessionId,
             int classId,
@@ -367,7 +364,6 @@ public class AttendanceRecordDAO {
         return list;
     }
 
-    // NEW
     // =====================================
     // ATTENDANCE REPORT BY SESSION ID
     // =====================================

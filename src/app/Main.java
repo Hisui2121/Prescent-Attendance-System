@@ -1,4 +1,8 @@
-// Sa loob ng iyong Main.java
+// =========================================================
+// ATTENDANCE MANAGEMENT SYSTEM
+// Developed by: ACE
+// Members: Bryze Ayapana, Jade Casano, Jaedee Manalang, Ritz Paredes
+// =========================================================
 package app;
 
 import javafx.application.Application;
@@ -20,7 +24,6 @@ public class Main extends Application {
         database.DBInitialize.initialize();
 
 
-        // Set application icon if logo.png is available in resources/assets
         try {
             java.io.InputStream is = getClass().getResourceAsStream("/assets/logo.png");
             if (is == null) {
@@ -37,7 +40,7 @@ public class Main extends Application {
         
         // Load Login First
         LoginUI login = new LoginUI();
-        window.setScene(login.getScene(this)); // Pinasa natin 'this' para ma-access ang loadDashboard
+        window.setScene(login.getScene(this)); 
         window.centerOnScreen();
         window.show();
     }

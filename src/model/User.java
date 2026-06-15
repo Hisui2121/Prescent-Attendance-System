@@ -1,15 +1,5 @@
 package model;
 
-/**
- * Represents a system user (Admin, Teacher account, etc.).
- *
- * OOP CONCEPTS DEMONSTRATED:
- * - Inheritance      : extends Person, inheriting fullName and email.
- * - Method Overriding: overrides getPersonId(), getRole(), getDisplayInfo(),
- *                      and toString() from Person.
- * - Dynamic Binding  : when User is referenced as a Person, Java
- *                      automatically calls these overridden versions at runtime.
- */
 public class User extends Person {
 
     private int    userId;
@@ -35,29 +25,19 @@ public class User extends Person {
     // OVERRIDDEN ABSTRACT METHODS (Method Overriding)
     // =========================================================
 
-    /**
-     * @Override getPersonId() from Person
-     * For a system User, the "person ID" is the username.
-     * Dynamic binding: Person ref → returns username at runtime.
-     */
+   
     @Override
     public String getPersonId() {
         return username;
     }
 
-    /**
-     * @Override getRole() from Person
-     * Returns the user's system role (e.g. "Admin", "Teacher").
-     */
+   
     @Override
     public String getRole() {
         return role != null ? role : "Unknown";
     }
 
-    /**
-     * @Override getDisplayInfo() from Person
-     * User-specific format — shows username and system role.
-     */
+   
     @Override
     public String getDisplayInfo() {
         return "[User] " + fullName

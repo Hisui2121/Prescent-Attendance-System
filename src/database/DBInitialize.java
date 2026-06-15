@@ -173,9 +173,7 @@ public class DBInitialize {
             rs.close();
 
             if (!found) {
-                // If the columnDef contains a non-constant default expression (like datetime('now'))
-                // some SQLite versions reject ALTER TABLE ... ADD COLUMN with such defaults.
-                // Work around: add the column with its type only, then run an UPDATE to backfill the default value.
+               
                 String typeOnly = columnDef;
                 String defaultExpr = null;
 

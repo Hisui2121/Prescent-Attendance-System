@@ -19,7 +19,7 @@ public class EventBus {
 
     public static void fireStudentChanged() {
         for (Runnable r : studentListeners) {
-            try { r.run(); } catch (Exception ex) { /* ignore listener errors */ }
+            try { r.run(); } catch (Exception ex) {  }
         }
     }
 
@@ -33,7 +33,7 @@ public class EventBus {
 
     public static void fireClassChanged() {
         for (Runnable r : classListeners) {
-            try { r.run(); } catch (Exception ex) { /* ignore listener errors */ }
+            try { r.run(); } catch (Exception ex) { }
         }
     }
 
@@ -48,7 +48,7 @@ public class EventBus {
 
     public static void fireEnrollmentChanged() {
         for (Runnable r : enrollmentListeners) {
-            try { r.run(); } catch (Exception ex) { /* ignore listener errors */ }
+            try { r.run(); } catch (Exception ex) {  }
         }
     }
 
@@ -63,7 +63,7 @@ public class EventBus {
 
     public static void fireNotificationChanged() {
         for (Runnable r : notificationListeners) {
-            try { r.run(); } catch (Exception ex) { /* ignore listener errors */ }
+            try { r.run(); } catch (Exception ex) { }
         }
     }
 
@@ -80,7 +80,7 @@ public class EventBus {
 
     public static void fireSessionChanged() {
         for (Runnable r : sessionListeners) {
-            try { r.run(); } catch (Exception ex) { /* ignore listener errors */ }
+            try { r.run(); } catch (Exception ex) { }
         }
     }
 }

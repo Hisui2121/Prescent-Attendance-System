@@ -373,8 +373,6 @@ public class TeacherUI {
             for (AttendanceSession s : classSessions) {
                 records.addAll(recordDAO.getAttendanceSheet(s.getId()));
             }
-            // Attach session_date to each record via sessionId lookup (getAttendanceSheet sets sessionId)
-            // We'll key bucket from the session's session_date, not the record timestamp
 
             boolean isSpecificMonth = selectedMonth != null && !selectedMonth.equals("All Months");
             Integer specificMonthIdx = null;
@@ -923,7 +921,6 @@ public class TeacherUI {
     // Helpers
     // =================================================================
 
-    /** Populate course + year dropdowns from students in the given classes */
     private void populateCourseYear(List<Class> classes, ComboBox<String> courseBox, ComboBox<String> yearBox) {
         Set<String> courses = new LinkedHashSet<>();
         Set<String> years   = new LinkedHashSet<>();
@@ -944,7 +941,6 @@ public class TeacherUI {
         yearBox.setItems(FXCollections.observableArrayList(years));
     }
 
-    /** Determine whether a class belongs to the currently logged-in teacher */
     private boolean ownsClass(Class c) {
         if (c == null) return false;
         try {
@@ -957,7 +953,7 @@ public class TeacherUI {
                     if (cu != null && cu.getEmail() != null && cu.getEmail().equalsIgnoreCase(t.getEmail())) return true;
                 }
             }
-        } catch (Exception ex) { /* treat as not owned */ }
+        } catch (Exception ex) { }
         return false;
     }
 

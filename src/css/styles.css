@@ -1,14 +1,12 @@
-/* src/css/styles.css */
-
 /* General App Styling */
 .root {
     -fx-font-family: "Segoe UI", "Open Sans", sans-serif;
     -fx-background-color: #F4F6F8; 
 }
 
-/* --- LOGIN UI STYLES --- */
+/*LOGIN UI STYLES*/
 .login-bg {
-    /* Siguraduhing may bg_login.jpg ka sa assets folder */
+   
     -fx-background-image: url('../assets/bg_login.jpg');
     -fx-background-size: cover;
     -fx-background-position: center center;
@@ -16,7 +14,7 @@
 
 .login-card {
     -fx-background-color: #FFFFFF;
-    -fx-border-color: #FFC107; /* Yellow top border */
+    -fx-border-color: #FFC107; 
     -fx-border-width: 6 0 0 0;
     -fx-padding: 40;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 15, 0, 0, 5);
@@ -34,7 +32,7 @@
     -fx-border-color: #FFC107;
 }
 
-/* --- SIDEBAR STYLES (EduTrack Vibe) --- */
+/* SIDEBAR STYLES  */
 .sidebar {
     -fx-background-color: #F8FAFC;
     -fx-border-color: #E2E8F0;
@@ -46,7 +44,7 @@
     -fx-text-fill: #475569;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-alignment: CENTER_LEFT;   /* left aligned */
+    -fx-alignment: CENTER_LEFT;
     -fx-padding: 12 20;
     -fx-cursor: hand;
     -fx-background-radius: 4;
@@ -57,15 +55,14 @@
 }
 
 .sidebar-button-active {
-    -fx-background-color: #FFC107; /* Yellow highlight */
+    -fx-background-color: #FFC107;
     -fx-text-fill: #1E293B;
     -fx-background-radius: 4;
 }
 
-/* Ensure pressed / armed state does not change font or alignment */
 .sidebar-button:armed, .sidebar-button-active:armed {
-    -fx-translate-y: 0; /* avoid movement */
-    -fx-font-size: 14px; /* keep same size */
+    -fx-translate-y: 0; 
+    -fx-font-size: 14px; 
     -fx-alignment: CENTER_LEFT;
 }
 
@@ -81,7 +78,6 @@
     -fx-border-radius: 6;
     -fx-background-radius: 6;
     -fx-padding: 20;
-    /* EduTrack has a thick top border for some cards, let's add it to stats */
     -fx-border-color: #FFC107 #E2E8F0 #E2E8F0 #E2E8F0;
     -fx-border-width: 3 1 1 1;
 }
@@ -98,14 +94,14 @@
     -fx-font-weight: bold;
 }
 
-/* BUTTONS - Uniform design */
+/* BUTTONS */
 .primary-button, .secondary-button, .dark-button {
     -fx-font-family: "Segoe UI", "Open Sans", sans-serif;
-    -fx-font-size: 13px;          /* consistent font size */
+    -fx-font-size: 13px;          
     -fx-font-weight: bold;
     -fx-background-radius: 6;
-    -fx-padding: 8 18;            /* consistent padding */
-    -fx-pref-height: 36px;        /* uniform height */
+    -fx-padding: 8 18;            
+    -fx-pref-height: 36px;        
     -fx-cursor: hand;
     -fx-border-width: 0;
 }
@@ -127,7 +123,6 @@
     -fx-text-fill: #FFFFFF;
 }
 
-/* TABLE - cleaner look */
 .table-view {
     -fx-background-color: transparent;
     -fx-border-color: #E2E8F0;
@@ -147,7 +142,6 @@
 .table-view .row:odd { -fx-background-color: #FFFFFF; }
 .table-view .row:even { -fx-background-color: #FBFCFD; }
 
-/* CARD (content container) refinement */
 .card {
     -fx-background-color: #FFFFFF;
     -fx-border-color: #E2E8F0;

@@ -1,15 +1,5 @@
 package model;
 
-/**
- * Represents a student enrolled in the system.
- *
- * OOP CONCEPTS DEMONSTRATED:
- * - Inheritance      : extends Person, inheriting fullName and email.
- * - Method Overriding: overrides getPersonId(), getRole(), getDisplayInfo(),
- *                      and toString() from Person.
- * - Dynamic Binding  : when Student is referenced as a Person, Java
- *                      automatically calls these overridden versions at runtime.
- */
 public class Student extends Person {
 
     private int    id;
@@ -54,27 +44,19 @@ public class Student extends Person {
     // OVERRIDDEN ABSTRACT METHODS (Method Overriding)
     // =========================================================
 
-    /**
-     * @Override getPersonId() from Person
-     * Dynamic binding: Person ref → returns studentId at runtime.
-     */
+   
     @Override
     public String getPersonId() {
         return studentId;
     }
 
-    /**
-     * @Override getRole() from Person
-     */
+  
     @Override
     public String getRole() {
         return "Student";
     }
 
-    /**
-     * @Override getDisplayInfo() from Person
-     * Adds course and year level info specific to students.
-     */
+  
     @Override
     public String getDisplayInfo() {
         return "[Student] " + fullName
@@ -84,9 +66,7 @@ public class Student extends Person {
              + " | Email: "      + email;
     }
 
-    // =========================================================
-    // STUDENT-SPECIFIC GETTERS & SETTERS
-    // =========================================================
+   
     public int    getId()                      { return id; }
     public void   setId(int id)                { this.id = id; }
 
@@ -99,9 +79,7 @@ public class Student extends Person {
     public String getYearLevel()               { return yearLevel; }
     public void   setYearLevel(String yl)      { this.yearLevel = yl; }
 
-    // =========================================================
-    // toString (method overriding)
-    // =========================================================
+   
     @Override
     public String toString() {
         if (fullName != null && studentId != null)

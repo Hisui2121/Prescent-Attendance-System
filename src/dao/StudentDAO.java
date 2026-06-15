@@ -10,21 +10,8 @@ import database.DBConnect;
 import model.Person;
 import model.Student;
 
-/**
- * Data Access Object for Student records.
- *
- * OOP CONCEPTS DEMONSTRATED:
- * - Polymorphism  : mapRow() returns Person; callers can hold the result
- *                   as either Person or Student.
- * - Dynamic Binding: Person.getDisplayInfo() / getPersonId() / getRole()
- *                    resolve to Student's overridden versions at runtime.
- */
 public class StudentDAO {
 
-    // =========================================================
-    // PRIVATE HELPER — maps a ResultSet row to a Student
-    // Returns Person to show polymorphic return type usage.
-    // =========================================================
     private Person mapRow(ResultSet rs) throws Exception {
         Student s = new Student();
         s.setId(rs.getInt("id"));
@@ -71,9 +58,7 @@ public class StudentDAO {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                // mapRow() returns Person; we cast to Student safely.
-                // This demonstrates dynamic binding — the Student override
-                // runs even though mapRow's return type is Person.
+                
                 students.add((Student) mapRow(rs));
             }
         } catch (Exception e) {
@@ -82,16 +67,6 @@ public class StudentDAO {
         return students;
     }
 
-    /**
-     * Returns all students as a list of Person references.
-     * Demonstrates polymorphism: callers iterate over Person objects
-     * and call getDisplayInfo() — Java dynamically binds to Student's version.
-     *
-     * Example usage (in DashboardUI or reports):
-     *   for (Person p : studentDAO.getAllPersons()) {
-     *       System.out.println(p.getDisplayInfo()); // Student override runs
-     *   }
-     */
     public List<Person> getAllPersons() {
         List<Person> persons = new ArrayList<>();
         String sql = "SELECT * FROM students";

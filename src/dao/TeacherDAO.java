@@ -10,20 +10,8 @@ import database.DBConnect;
 import model.Person;
 import model.Teacher;
 
-/**
- * Data Access Object for Teacher records.
- *
- * OOP CONCEPTS DEMONSTRATED:
- * - Polymorphism  : mapRow() returns Person; callers can treat Teachers
- *                   as Person objects for uniform processing.
- * - Dynamic Binding: Person.getDisplayInfo() / getPersonId() / getRole()
- *                    resolve to Teacher's overridden versions at runtime.
- */
 public class TeacherDAO {
 
-    // =========================================================
-    // PRIVATE HELPER — maps a ResultSet row to a Teacher (as Person)
-    // =========================================================
     private Person mapRow(ResultSet rs) throws Exception {
         Teacher t = new Teacher();
         t.setId(rs.getInt("id"));
@@ -68,17 +56,6 @@ public class TeacherDAO {
         return list;
     }
 
-    /**
-     * Returns all teachers as Person references.
-     * Demonstrates polymorphism: callers iterate uniformly over Person
-     * objects and call getDisplayInfo() — Java dynamically binds to
-     * Teacher's overridden version at runtime.
-     *
-     * Example usage:
-     *   for (Person p : teacherDAO.getAllPersons()) {
-     *       System.out.println(p.getDisplayInfo()); // Teacher override runs
-     *   }
-     */
     public List<Person> getAllPersons() {
         List<Person> persons = new ArrayList<>();
         try {

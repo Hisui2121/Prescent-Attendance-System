@@ -1,15 +1,5 @@
 package model;
 
-/**
- * Represents a teacher/professor in the system.
- *
- * OOP CONCEPTS DEMONSTRATED:
- * - Inheritance      : extends Person, inheriting fullName and email.
- * - Method Overriding: overrides getPersonId(), getRole(), getDisplayInfo(),
- *                      and toString() from Person.
- * - Dynamic Binding  : when Teacher is referenced as a Person, Java
- *                      automatically calls these overridden versions at runtime.
- */
 public class Teacher extends Person {
 
     private int    id;
@@ -32,27 +22,17 @@ public class Teacher extends Person {
     // OVERRIDDEN ABSTRACT METHODS (Method Overriding)
     // =========================================================
 
-    /**
-     * @Override getPersonId() from Person
-     * Dynamic binding: Person ref → returns teacherId at runtime.
-     */
     @Override
     public String getPersonId() {
         return teacherId;
     }
 
-    /**
-     * @Override getRole() from Person
-     */
     @Override
     public String getRole() {
         return "Teacher";
     }
 
-    /**
-     * @Override getDisplayInfo() from Person
-     * Teacher-specific format — no course/year, but shows teacher ID clearly.
-     */
+   
     @Override
     public String getDisplayInfo() {
         return "[Teacher] " + fullName

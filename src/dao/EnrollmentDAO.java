@@ -116,8 +116,7 @@ public class EnrollmentDAO {
             Statement stmt = conn.createStatement();
             if (!hasDate) {
                 try {
-                    // SQLite does not allow non-constant defaults in ALTER TABLE on some versions.
-                    // Add the column without a default, then backfill existing rows.
+                    
                     stmt.executeUpdate("ALTER TABLE enrollments ADD COLUMN date_enrolled TEXT");
                     stmt.executeUpdate("UPDATE enrollments SET date_enrolled = datetime('now') WHERE date_enrolled IS NULL");
                     System.out.println("Migration: added column date_enrolled to enrollments (backfilled existing rows)");
