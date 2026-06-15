@@ -1,0 +1,36 @@
+[2026-06-15 14:43:15] [WARN] [LOGIN] User: admin | Details: Login failed - invalid credentials
+[2026-06-15 14:45:02] [WARN] [LOGIN] User: admin | Details: Login failed - invalid credentials
+[2026-06-15 14:45:19] [WARN] [LOGIN] User: admin | Details: Login failed - invalid credentials
+[2026-06-15 14:45:25] [WARN] [LOGIN] User: admin | Details: Login failed - invalid credentials
+[2026-06-15 14:47:18] [WARN] [LOGIN] User: admin | Details: Login failed - invalid credentials
+[2026-06-15 14:48:47] [WARN] [LOGIN] User: admin | Details: Login failed - invalid credentials
+[2026-06-15 14:51:11] [WARN] [LOGIN] User: admin | Details: Login failed - invalid credentials
+[2026-06-15 14:51:16] [WARN] [LOGIN] User: admin | Details: Login failed - invalid credentials
+[2026-06-15 14:52:43] [INFO] [LOGIN] User: admin | Details: Login successful
+[2026-06-15 15:07:54] [WARN] [LOGIN] User: admin | Details: Login failed - invalid credentials
+[2026-06-15 15:07:59] [INFO] [LOGIN] User: admin | Details: Login successful
+[2026-06-15 15:10:15] [INFO] [LOGIN] User: admin | Details: Login successful
+[2026-06-15 15:11:20] [INFO] [LOGIN] User: admin | Details: Login successful
+[2026-06-15 15:13:32] [INFO] [LOGIN] User: admin | Details: Login successful
+[2026-06-15 15:21:46] [INFO] [LOGIN] User: admin | Details: Login successful
+[2026-06-15 15:26:11] [INFO] [LOGIN] User: admin | Details: Login successful
+[2026-06-15 15:32:47] [INFO] [LOGIN] User: admin | Details: Login successful
+[2026-06-15 15:38:07] [INFO] [LOGIN] User: admin | Details: Login successful
+[2026-06-15 15:39:27] [INFO] [LOGOUT] User: admin | Details: User logged out
+[2026-06-15 15:39:32] [INFO] [LOGIN] User: admin | Details: Login successful
+[2026-06-15 15:39:41] [INFO] [LOGIN] User: admin | Details: Login successful
+[2026-06-15 15:40:03] [INFO] [LOGOUT] User: admin | Details: User logged out
+[2026-06-15 15:40:11] [WARN] [LOGIN] User: gecilie@gmail.com | Details: Login failed - invalid credentials
+[2026-06-15 15:40:17] [INFO] [LOGIN] User: admin | Details: Login successful
+[2026-06-15 15:40:35] [INFO] [LOGOUT] User: admin | Details: User logged out
+[2026-06-15 15:40:38] [WARN] [LOGIN] User: gecilie@gmail.com | Details: Login failed - invalid credentials
+[2026-06-15 15:44:02] [INFO] [LOGIN] User: admin | Details: Login successful
+[2026-06-15 15:44:32] [INFO] [LOGOUT] User: admin | Details: User logged out
+[2026-06-15 15:44:34] [INFO] [LOGIN] User: gecilie@gmail.com | Details: Login successful
+[2026-06-15 15:55:39] [INFO] [LOGIN] User: gecilie@gmail.com | Details: Login successful
+[2026-06-15 16:02:50] [INFO] [LOGIN] User: admin | Details: Login successful
+[2026-06-15 16:11:34] [INFO] [LOGIN] User: gecilie@gmail.com | Details: Login successful
+[2026-06-15 16:12:28] [INFO] [LOGIN] User: gecilie@gmail.com | Details: Login successful
+[2026-06-15 16:25:06] [INFO] [LOGIN] User: admin | Details: Login successful
+[2026-06-15 16:26:46] [INFO] [LOGOUT] User: admin | Details: User logged out
+[2026-06-15 16:26:50] [INFO] [LOGIN] User: gecilie@gmail.com | Details: Login successful

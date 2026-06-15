@@ -5,6 +5,8 @@ public class Enrollment {
     private int id;
     private String studentId;
     private int classId;
+    private String dateEnrolled;
+    private String status;
 
     public Enrollment() {
 
@@ -43,5 +45,21 @@ public class Enrollment {
 
     public void setClassId(int classId) {
         this.classId = classId;
+    }
+
+    public String getDateEnrolled() {
+        return dateEnrolled;
+    }
+
+    public void setDateEnrolled(String dateEnrolled) {
+        this.dateEnrolled = dateEnrolled;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

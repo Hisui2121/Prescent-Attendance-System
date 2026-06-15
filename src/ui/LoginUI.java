@@ -84,13 +84,17 @@ public class LoginUI {
         
         // LOGIN ACTION LOGIC
         btnLogin.setOnAction(e -> {
-            // TODO: Add proper DAO checking here later. For now, bypass to Dashboard.
-            if(txtEmail.getText().equals("admin") && txtPass.getText().equals("123")) {
-                mainApp.loadDashboard(); 
+            service.AuthenticationService auth = service.AuthenticationService.getInstance();
+            String user = txtEmail.getText().trim();
+            String pass = txtPass.getText();
+            boolean ok = auth.login(user, pass);
+            if (ok) {
+                mainApp.loadDashboard();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Credentials!");
                 alert.show();
             }
+            
         });
 
         loginCard.getChildren().addAll(lblSignIn, lblWelcome, emailBox, passBox, btnLogin);

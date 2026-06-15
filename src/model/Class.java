@@ -90,4 +90,12 @@ public class Class {
     public void setRoom(String room) {
         this.room = room;
     }
+
+    @Override
+    public String toString() {
+        if (classCode != null && className != null) {
+            return classCode + " - " + className;
+        }
+        return classCode != null ? classCode : "";
+    }
 }

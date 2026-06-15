@@ -9,18 +9,29 @@ import util.Logger;
 
 public class AuthenticationService {
 
+    private static AuthenticationService instance;
+
     private UserDAO userDAO;
     private User currentUser;
 
-    public AuthenticationService() {
+    private AuthenticationService() {
         this.userDAO = new UserDAO();
         this.currentUser = null;
+    }
+
+    public static synchronized AuthenticationService getInstance() {
+        if (instance == null) instance = new AuthenticationService();
+        return instance;
     }
 
     public boolean login(String username, String password) {
         User user = userDAO.authenticateUser(username, password);
         
         if (user != null) {
+            // normalize stored values (trim)
+            if (user.getRole() != null) user.setRole(user.getRole().trim());
+            if (user.getUsername() != null) user.setUsername(user.getUsername().trim());
+
             this.currentUser = user;
             Logger.logLogin(username, true);
             System.out.println("\n✓ Welcome, " + user.getUsername() + " (" + user.getRole() + ")!");
@@ -53,7 +64,8 @@ public class AuthenticationService {
             return false;
         }
         
-        Role role = Role.fromCode(currentUser.getRole());
+        Role role = getCurrentRole();
+        if (role == null) return false;
         boolean hasAccess = RolePermission.hasPermission(role, permission);
         
         if (!hasAccess) {
@@ -67,10 +79,26 @@ public class AuthenticationService {
         if (currentUser == null) {
             return null;
         }
-        return Role.fromCode(currentUser.getRole());
+        String r = currentUser.getRole();
+        if (r == null) return null;
+        r = r.trim();
+        try {
+            return Role.fromCode(r);
+        } catch (IllegalArgumentException ex) {
+            System.out.println("Warning: unknown role code '" + r + "' for user " + getCurrentUsername() + ", defaulting to null.");
+            return null;
+        }
     }
 
     public String getCurrentUsername() {
-        return currentUser != null ? currentUser.getUsername() : "Unknown";
+        if (currentUser == null) return "Unknown";
+        // prefer username field; if empty try email
+        String u = currentUser.getUsername();
+        if (u != null && !u.trim().isEmpty()) return u.trim();
+        try {
+            String email = currentUser.getEmail();
+            if (email != null && !email.trim().isEmpty()) return email.trim();
+        } catch (Exception ex) { }
+        return "Unknown";
     }
 }

@@ -41,14 +41,15 @@
     -fx-border-width: 0 1 0 0;
 }
 
-.sidebar-button {
+.sidebar-button, .sidebar-button-active {
     -fx-background-color: transparent;
     -fx-text-fill: #475569;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-alignment: CENTER_LEFT;
+    -fx-alignment: CENTER_LEFT;   /* left aligned */
     -fx-padding: 12 20;
     -fx-cursor: hand;
+    -fx-background-radius: 4;
 }
 
 .sidebar-button:hover {
@@ -59,6 +60,13 @@
     -fx-background-color: #FFC107; /* Yellow highlight */
     -fx-text-fill: #1E293B;
     -fx-background-radius: 4;
+}
+
+/* Ensure pressed / armed state does not change font or alignment */
+.sidebar-button:armed, .sidebar-button-active:armed {
+    -fx-translate-y: 0; /* avoid movement */
+    -fx-font-size: 14px; /* keep same size */
+    -fx-alignment: CENTER_LEFT;
 }
 
 /* --- DASHBOARD STATS & CARDS --- */
@@ -90,25 +98,61 @@
     -fx-font-weight: bold;
 }
 
-/* Buttons */
+/* BUTTONS - Uniform design */
+.primary-button, .secondary-button, .dark-button {
+    -fx-font-family: "Segoe UI", "Open Sans", sans-serif;
+    -fx-font-size: 13px;          /* consistent font size */
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 8 18;            /* consistent padding */
+    -fx-pref-height: 36px;        /* uniform height */
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+}
+
 .primary-button {
     -fx-background-color: #FFC107;
     -fx-text-fill: #1E293B;
-    -fx-font-weight: bold;
-    -fx-background-radius: 4;
-    -fx-padding: 10 20;
-    -fx-cursor: hand;
 }
+.primary-button:hover { -fx-background-color: #F5B000; }
 
-.primary-button:hover {
-    -fx-background-color: #F5B000;
+.secondary-button {
+    -fx-background-color: #1E293B;
+    -fx-text-fill: #FFFFFF;
 }
+.secondary-button:hover { -fx-background-color: #16202a; }
 
 .dark-button {
-    -fx-background-color: #1E293B; /* Dark button for Login */
+    -fx-background-color: #1E293B;
     -fx-text-fill: #FFFFFF;
+}
+
+/* TABLE - cleaner look */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #E2E8F0;
+    -fx-border-width: 1;
+    -fx-table-cell-border-color: transparent;
+}
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(#f6f7f9, #eef2f6);
+}
+.table-view .column-header, .table-view .column-header .label {
     -fx-font-weight: bold;
-    -fx-background-radius: 2;
-    -fx-padding: 12 25;
-    -fx-cursor: hand;
+    -fx-text-fill: #1E293B;
+}
+.table-view .cell {
+    -fx-padding: 6 8;
+}
+.table-view .row:odd { -fx-background-color: #FFFFFF; }
+.table-view .row:even { -fx-background-color: #FBFCFD; }
+
+/* CARD (content container) refinement */
+.card {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 18;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 8, 0, 0, 4);
 }

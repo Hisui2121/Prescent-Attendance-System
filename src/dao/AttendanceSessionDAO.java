@@ -108,4 +108,27 @@ public class AttendanceSessionDAO {
 
         return list;
     }
+
+    // =====================================
+    // DELETE SESSION (and its attendance records)
+    // =====================================
+    public boolean deleteSession(int sessionId) {
+        String deleteRecords = "DELETE FROM attendance_records WHERE session_id = ?";
+        String deleteSession = "DELETE FROM attendance_sessions WHERE id = ?";
+        try {
+            Connection conn = DBConnect.connect();
+            PreparedStatement p1 = conn.prepareStatement(deleteRecords);
+            p1.setInt(1, sessionId);
+            p1.executeUpdate();
+
+            PreparedStatement p2 = conn.prepareStatement(deleteSession);
+            p2.setInt(1, sessionId);
+            p2.executeUpdate();
+
+            return true;
+        } catch (Exception e) {
+            System.out.println("Delete session error: " + e.getMessage());
+            return false;
+        }
+    }
 }

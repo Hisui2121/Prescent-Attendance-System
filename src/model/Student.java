@@ -95,4 +95,12 @@ public class Student {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        if (fullName != null && studentId != null) {
+            return fullName + " (" + studentId + ")";
+        }
+        return studentId != null ? studentId : "";
+    }
 }

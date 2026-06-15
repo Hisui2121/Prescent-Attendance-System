@@ -11,13 +11,15 @@ public class UserDAO {
 
     public void addUser(User user) {
         try {
-            String sql = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO users (username, password, role, full_name, email) VALUES (?, ?, ?, ?, ?)";
             Connection conn = DBConnect.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, PasswordUtil.hashPassword(user.getPassword()));
             pstmt.setString(3, user.getRole());
+            pstmt.setString(4, user.getFullName());
+            pstmt.setString(5, user.getEmail());
             
             pstmt.executeUpdate();
             System.out.println("✓ User added successfully!");
@@ -28,11 +30,13 @@ public class UserDAO {
 
     public User authenticateUser(String username, String password) {
         try {
-            String sql = "SELECT * FROM users WHERE username = ?";
+            // Allow login using username OR email
+            String sql = "SELECT * FROM users WHERE username = ? OR email = ?";
             Connection conn = DBConnect.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             
             pstmt.setString(1, username);
+            pstmt.setString(2, username);
             ResultSet rs = pstmt.executeQuery();
             
             if (rs.next()) {
@@ -42,6 +46,8 @@ public class UserDAO {
                     user.setUserId(rs.getInt("id"));
                     user.setUsername(rs.getString("username"));
                     user.setRole(rs.getString("role"));
+                    user.setFullName(rs.getString("full_name"));
+                    user.setEmail(rs.getString("email"));
                     return user;
                 }
             }
@@ -65,6 +71,8 @@ public class UserDAO {
                 user.setUserId(rs.getInt("id"));
                 user.setUsername(rs.getString("username"));
                 user.setRole(rs.getString("role"));
+                user.setFullName(rs.getString("full_name"));
+                user.setEmail(rs.getString("email"));
                 return user;
             }
         } catch (SQLException e) {
@@ -86,6 +94,8 @@ public class UserDAO {
                 user.setUserId(rs.getInt("id"));
                 user.setUsername(rs.getString("username"));
                 user.setRole(rs.getString("role"));
+                user.setFullName(rs.getString("full_name"));
+                user.setEmail(rs.getString("email"));
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -96,13 +106,27 @@ public class UserDAO {
 
     public void updateUser(User user) {
         try {
-            String sql = "UPDATE users SET role = ? WHERE id = ?";
+            // If password is provided, update it as well
+            String sql;
+            if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+                sql = "UPDATE users SET role = ?, full_name = ?, email = ?, password = ? WHERE id = ?";
+            } else {
+                sql = "UPDATE users SET role = ?, full_name = ?, email = ? WHERE id = ?";
+            }
+
             Connection conn = DBConnect.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            
+
             pstmt.setString(1, user.getRole());
-            pstmt.setInt(2, user.getUserId());
-            
+            pstmt.setString(2, user.getFullName());
+            pstmt.setString(3, user.getEmail());
+            if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+                pstmt.setString(4, PasswordUtil.hashPassword(user.getPassword()));
+                pstmt.setInt(5, user.getUserId());
+            } else {
+                pstmt.setInt(4, user.getUserId());
+            }
+
             pstmt.executeUpdate();
             System.out.println("✓ User updated successfully!");
         } catch (SQLException e) {

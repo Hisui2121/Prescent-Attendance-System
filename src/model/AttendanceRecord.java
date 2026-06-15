@@ -7,6 +7,20 @@ public class AttendanceRecord {
     private String studentId;
     private String fullName;
     private String status;
+    private String timestamp;
+    // Additional fields for reporting
+    private String course;
+    private String yearLevel;
+    private String email;
+
+    // New notification related fields
+    private Integer classId;
+    private String className;
+    private String classCode;
+    private String professorName;
+    private String professorId;
+    private Integer absentCount;
+    private String alertType;
 
     public AttendanceRecord() {
 
@@ -60,4 +74,43 @@ public class AttendanceRecord {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    // New reporting getters/setters
+    public String getCourse() { return course; }
+    public void setCourse(String course) { this.course = course; }
+
+    public String getYearLevel() { return yearLevel; }
+    public void setYearLevel(String yearLevel) { this.yearLevel = yearLevel; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    // Notification / class related getters/setters
+    public Integer getClassId() { return classId; }
+    public void setClassId(Integer classId) { this.classId = classId; }
+
+    public String getClassName() { return className; }
+    public void setClassName(String className) { this.className = className; }
+
+    public String getClassCode() { return classCode; }
+    public void setClassCode(String classCode) { this.classCode = classCode; }
+
+    public String getProfessorName() { return professorName; }
+    public void setProfessorName(String professorName) { this.professorName = professorName; }
+    public String getProfessorId() { return professorId; }
+    public void setProfessorId(String professorId) { this.professorId = professorId; }
+
+    public Integer getAbsentCount() { return absentCount; }
+    public void setAbsentCount(Integer absentCount) { this.absentCount = absentCount; }
+
+    public String getAlertType() { return alertType; }
+    public void setAlertType(String alertType) { this.alertType = alertType; }
 }

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              name="attendance_report" pageWidth="595" pageHeight="842"
+              columnWidth="555" leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20">
+
+    <!-- PARAMETERS: session-level info passed from Java -->
+    <parameter name="subjectName"  class="java.lang.String"/>
+    <parameter name="sessionDate"  class="java.lang.String"/>
+    <parameter name="professor"    class="java.lang.String"/>
+    <parameter name="classroom"    class="java.lang.String"/>
+    <parameter name="schedule"     class="java.lang.String"/>
+
+    <!-- FIELDS: per-row data from AttendanceRecord bean -->
+    <field name="studentId"  class="java.lang.String"/>
+    <field name="fullName"   class="java.lang.String"/>
+    <field name="course"     class="java.lang.String"/>
+    <field name="yearLevel"  class="java.lang.String"/>
+    <field name="email"      class="java.lang.String"/>
+    <field name="status"     class="java.lang.String"/>
+    <field name="timestamp"  class="java.lang.String"/>
+
+    <!-- TITLE BAND: report header -->
+    <title>
+        <band height="130">
+
+            <!-- Title -->
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="24"/>
+                <textElement textAlignment="Center">
+                    <font size="16" isBold="true"/>
+                </textElement>
+                <text><![CDATA[ATTENDANCE REPORT]]></text>
+            </staticText>
+
+            <!-- Session meta -->
+            <staticText>
+                <reportElement x="0" y="30" width="80" height="14"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[Subject:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="80" y="30" width="220" height="14"/>
+                <textFieldExpression>$P{subjectName}</textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement x="320" y="30" width="80" height="14"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[Date:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="400" y="30" width="155" height="14"/>
+                <textFieldExpression>$P{sessionDate}</textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement x="0" y="50" width="80" height="14"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[Professor:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="80" y="50" width="220" height="14"/>
+                <textFieldExpression>$P{professor}</textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement x="320" y="50" width="80" height="14"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[Classroom:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="400" y="50" width="155" height="14"/>
+                <textFieldExpression>$P{classroom}</textFieldExpression>
+            </textField>
+
+            <staticText>
+                <reportElement x="0" y="70" width="80" height="14"/>
+                <textElement><font isBold="true"/></textElement>
+                <text><![CDATA[Schedule:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="80" y="70" width="220" height="14"/>
+                <textFieldExpression>$P{schedule}</textFieldExpression>
+            </textField>
+
+        </band>
+    </title>
+
+    <!-- COLUMN HEADER BAND -->
+    <columnHeader>
+        <band height="24">
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="24" backcolor="#333333" mode="Opaque"/>
+            </rectangle>
+
+            <!-- Adjusted columns: widths chosen so timestamp has enough space -->
+            <staticText>
+                <reportElement x="0" y="4" width="80" height="16" forecolor="#FFFFFF"/>
+                <textElement><font isBold="true" size="10"/></textElement>
+                <text><![CDATA[Student ID]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="80" y="4" width="150" height="16" forecolor="#FFFFFF"/>
+                <textElement><font isBold="true" size="10"/></textElement>
+                <text><![CDATA[Full Name]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="230" y="4" width="80" height="16" forecolor="#FFFFFF"/>
+                <textElement><font isBold="true" size="10"/></textElement>
+                <text><![CDATA[Course]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="310" y="4" width="40" height="16" forecolor="#FFFFFF"/>
+                <textElement><font isBold="true" size="10"/></textElement>
+                <text><![CDATA[Year]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="350" y="4" width="120" height="16" forecolor="#FFFFFF"/>
+                <textElement><font isBold="true" size="10"/></textElement>
+                <text><![CDATA[Email]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="470" y="4" width="40" height="16" forecolor="#FFFFFF"/>
+                <textElement><font isBold="true" size="10"/></textElement>
+                <text><![CDATA[Status]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="510" y="4" width="45" height="16" forecolor="#FFFFFF"/>
+                <textElement><font isBold="true" size="10"/></textElement>
+                <text><![CDATA[Timestamp]]></text>
+            </staticText>
+
+        </band>
+    </columnHeader>
+
+    <!-- DETAIL BAND: one row per student -->
+    <detail>
+        <band height="18">
+            <textField>
+                <reportElement x="0" y="1" width="80" height="16"/>
+                <textFieldExpression><![CDATA[$F{studentId}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="80" y="1" width="150" height="16"/>
+                <textFieldExpression><![CDATA[$F{fullName}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="230" y="1" width="80" height="16"/>
+                <textFieldExpression><![CDATA[$F{course}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="310" y="1" width="40" height="16"/>
+                <textFieldExpression><![CDATA[$F{yearLevel}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="350" y="1" width="120" height="16"/>
+                <textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="470" y="1" width="40" height="16"/>
+                <textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="510" y="1" width="45" height="16"/>
+                <textFieldExpression><![CDATA[$F{timestamp}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+</jasperReport>
