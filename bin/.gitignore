@@ -1,7 +1,11 @@
-/ui/
 /app/
-/util/
+/assets/
 /css/
-/model/
 /dao/
 /database/
+/model/
+/report/
+/service/
+/tools/
+/ui/
+/util/

@@ -103,3 +103,6 @@
 [2026-06-15 19:24:35] [INFO] [LOGOUT] User: admin | Details: User logged out
 [2026-06-15 19:25:04] [INFO] [LOGIN] User: franco@gmail.com | Details: Login successful
 [2026-06-15 19:27:21] [INFO] [LOGOUT] User: francis.franco | Details: User logged out
+[2026-06-16 21:43:49] [INFO] [LOGIN] User: admin | Details: Login successful
+[2026-06-16 21:44:39] [INFO] [LOGOUT] User: admin | Details: User logged out
+[2026-06-16 21:44:49] [INFO] [LOGIN] User: franco@gmail.com | Details: Login successful
